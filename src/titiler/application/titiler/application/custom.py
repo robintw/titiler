@@ -61,9 +61,9 @@ ColorMapName = Enum(  # type: ignore
 # )
 # tms = tms.register([EPSG3413, EPSG6933])
 
-# TileMatrixSetName = Enum(  # type: ignore
-#     "TileMatrixSetName", [(a, a) for a in sorted(tms.list())]
-# )
+TileMatrixSetName = Enum(  # type: ignore
+    "TileMatrixSetName", [(a, a) for a in sorted(tms.list())]
+)
 
 
 def ColorMapParams(
