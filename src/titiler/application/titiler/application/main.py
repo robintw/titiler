@@ -2,7 +2,6 @@
 
 import logging
 
-from titiler.application.custom import templates
 from titiler.application.routers import cog, mosaic, stac, tms
 from titiler.application.settings import ApiSettings
 from titiler.application.version import __version__ as titiler_version
@@ -14,6 +13,13 @@ from titiler.core.middleware import (
     TotalTimeMiddleware,
 )
 from titiler.mosaic.errors import MOSAIC_STATUS_CODES
+from starlette.templating import Jinja2Templates
+
+try:
+    from importlib.resources import files as resources_files  # type: ignore
+except ImportError:
+    # Try backported to PY<39 `importlib_resources`.
+    from importlib_resources import files as resources_files  # type: ignore
 
 from fastapi import FastAPI
 
@@ -25,6 +31,8 @@ from starlette_cramjam.middleware import CompressionMiddleware
 logging.getLogger("botocore.credentials").disabled = True
 logging.getLogger("botocore.utils").disabled = True
 logging.getLogger("rio-tiler").setLevel(logging.ERROR)
+
+templates = Jinja2Templates(directory=str(resources_files(__package__) / "templates"))
 
 api_settings = ApiSettings()
 
