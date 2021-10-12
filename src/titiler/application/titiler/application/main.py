@@ -61,15 +61,15 @@ add_exception_handlers(app, DEFAULT_STATUS_CODES)
 add_exception_handlers(app, MOSAIC_STATUS_CODES)
 
 
-# # Set all CORS enabled origins
-# if api_settings.cors_origins:
-#     app.add_middleware(
-#         CORSMiddleware,
-#         allow_origins=api_settings.cors_origins,
-#         allow_credentials=True,
-#         allow_methods=["GET"],
-#         allow_headers=["*"],
-#     )
+# Set all CORS enabled origins
+if api_settings.cors_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=api_settings.cors_origins,
+        allow_credentials=True,
+        allow_methods=["GET"],
+        allow_headers=["*"],
+    )
 
 # app.add_middleware(
 #     CompressionMiddleware,
