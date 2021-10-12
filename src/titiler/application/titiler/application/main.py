@@ -44,12 +44,6 @@ api_settings = ApiSettings()
 # )
 app = FastAPI()
 
-
-# @app.get("/")
-# def read_root():
-#     logging.info("Called root handler")
-#     return {"Hello": "World"}
-
 logging.info("Created app")
 
 if not api_settings.disable_cog:
@@ -63,7 +57,7 @@ if not api_settings.disable_stac:
 if not api_settings.disable_mosaic:
     app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
 
-# app.include_router(tms.router, tags=["TileMatrixSets"])
+app.include_router(tms.router, tags=["TileMatrixSets"])
 add_exception_handlers(app, DEFAULT_STATUS_CODES)
 add_exception_handlers(app, MOSAIC_STATUS_CODES)
 
