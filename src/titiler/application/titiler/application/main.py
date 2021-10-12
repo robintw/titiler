@@ -44,8 +44,8 @@ app = FastAPI(
 )
 logging.info("Created app")
 
-if not api_settings.disable_cog:
-    app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
+# if not api_settings.disable_cog:
+#     app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
 
 # if not api_settings.disable_stac:
 #     app.include_router(
@@ -55,45 +55,45 @@ if not api_settings.disable_cog:
 # if not api_settings.disable_mosaic:
 #     app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
 
-app.include_router(tms.router, tags=["TileMatrixSets"])
-add_exception_handlers(app, DEFAULT_STATUS_CODES)
-add_exception_handlers(app, MOSAIC_STATUS_CODES)
+# app.include_router(tms.router, tags=["TileMatrixSets"])
+# add_exception_handlers(app, DEFAULT_STATUS_CODES)
+# add_exception_handlers(app, MOSAIC_STATUS_CODES)
 
 
-# Set all CORS enabled origins
-if api_settings.cors_origins:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=api_settings.cors_origins,
-        allow_credentials=True,
-        allow_methods=["GET"],
-        allow_headers=["*"],
-    )
+# # Set all CORS enabled origins
+# if api_settings.cors_origins:
+#     app.add_middleware(
+#         CORSMiddleware,
+#         allow_origins=api_settings.cors_origins,
+#         allow_credentials=True,
+#         allow_methods=["GET"],
+#         allow_headers=["*"],
+#     )
 
-app.add_middleware(
-    CompressionMiddleware,
-    minimum_size=0,
-    exclude_mediatype={
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/jp2",
-        "image/webp",
-    },
-)
+# app.add_middleware(
+#     CompressionMiddleware,
+#     minimum_size=0,
+#     exclude_mediatype={
+#         "image/jpeg",
+#         "image/jpg",
+#         "image/png",
+#         "image/jp2",
+#         "image/webp",
+#     },
+# )
 
-app.add_middleware(
-    CacheControlMiddleware,
-    cachecontrol=api_settings.cachecontrol,
-    exclude_path={r"/healthz"},
-)
+# app.add_middleware(
+#     CacheControlMiddleware,
+#     cachecontrol=api_settings.cachecontrol,
+#     exclude_path={r"/healthz"},
+# )
 
 if api_settings.debug:
     app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
     app.add_middleware(TotalTimeMiddleware)
 
-if api_settings.lower_case_query_parameters:
-    app.add_middleware(LowerCaseQueryStringMiddleware)
+# if api_settings.lower_case_query_parameters:
+#     app.add_middleware(LowerCaseQueryStringMiddleware)
 
 
 @app.get("/healthz", description="Health Check", tags=["Health Check"])

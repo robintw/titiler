@@ -79,7 +79,7 @@ class LoggerMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next):
         """Add logs."""
-        self.logger.info(str(request.url))
+        self.logger.info("Middleware URL = " + str(request.url))
         qs = dict(request.query_params)
         if qs and self.querystrings:
             self.logger.info(qs)
