@@ -60,8 +60,8 @@ if not api_settings.disable_stac:
         stac.router, prefix="/stac", tags=["SpatioTemporal Asset Catalog"]
     )
 
-# if not api_settings.disable_mosaic:
-#     app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
+if not api_settings.disable_mosaic:
+    app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
 
 # app.include_router(tms.router, tags=["TileMatrixSets"])
 add_exception_handlers(app, DEFAULT_STATUS_CODES)
@@ -96,12 +96,12 @@ add_exception_handlers(app, MOSAIC_STATUS_CODES)
 #     exclude_path={r"/healthz"},
 # )
 
-# if api_settings.debug:
-#     app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
-#     app.add_middleware(TotalTimeMiddleware)
+if api_settings.debug:
+    app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
+    app.add_middleware(TotalTimeMiddleware)
 
-# if api_settings.lower_case_query_parameters:
-#     app.add_middleware(LowerCaseQueryStringMiddleware)
+if api_settings.lower_case_query_parameters:
+    app.add_middleware(LowerCaseQueryStringMiddleware)
 
 
 @app.get("/healthz", description="Health Check", tags=["Health Check"])
