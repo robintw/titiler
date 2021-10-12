@@ -36,13 +36,13 @@ templates = Jinja2Templates(directory=str(resources_files(__package__) / "templa
 
 api_settings = ApiSettings()
 
-# app = FastAPI(
-#     title=api_settings.name,
-#     description="A lightweight Cloud Optimized GeoTIFF tile server",
-#     version=titiler_version,
-#     root_path=api_settings.root_path,
-# )
-app = FastAPI()
+app = FastAPI(
+    title=api_settings.name,
+    description="A lightweight Cloud Optimized GeoTIFF tile server",
+    version=titiler_version,
+    root_path=api_settings.root_path,
+)
+# app = FastAPI()
 
 logging.info("Created app")
 
