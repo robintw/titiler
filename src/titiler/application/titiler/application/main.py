@@ -32,7 +32,7 @@ from starlette_cramjam.middleware import CompressionMiddleware
 # logging.getLogger("botocore.utils").disabled = True
 # logging.getLogger("rio-tiler").setLevel(logging.ERROR)
 
-# templates = Jinja2Templates(directory=str(resources_files(__package__) / "templates"))
+templates = Jinja2Templates(directory=str(resources_files(__package__) / "templates"))
 
 api_settings = ApiSettings()
 
@@ -45,10 +45,10 @@ api_settings = ApiSettings()
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    logging.info("Called root handler")
-    return {"Hello": "World"}
+# @app.get("/")
+# def read_root():
+#     logging.info("Called root handler")
+#     return {"Hello": "World"}
 
 logging.info("Created app")
 
@@ -110,10 +110,10 @@ def ping():
     return {"ping": "pong!"}
 
 
-# @app.get("/", response_class=HTMLResponse, include_in_schema=False)
-# def landing(request: Request):
-#     """TiTiler Landing page"""
-#     logging.info("On landing function")
-#     return templates.TemplateResponse(
-#         name="index.html", context={"request": request}, media_type="text/html",
-#     )
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+def landing(request: Request):
+    """TiTiler Landing page"""
+    logging.info("On landing function")
+    return templates.TemplateResponse(
+        name="index.html", context={"request": request}, media_type="text/html",
+    )
