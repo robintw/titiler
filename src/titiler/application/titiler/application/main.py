@@ -32,16 +32,24 @@ from starlette_cramjam.middleware import CompressionMiddleware
 # logging.getLogger("botocore.utils").disabled = True
 # logging.getLogger("rio-tiler").setLevel(logging.ERROR)
 
-templates = Jinja2Templates(directory=str(resources_files(__package__) / "templates"))
+# templates = Jinja2Templates(directory=str(resources_files(__package__) / "templates"))
 
 api_settings = ApiSettings()
 
-app = FastAPI(
-    title=api_settings.name,
-    description="A lightweight Cloud Optimized GeoTIFF tile server",
-    version=titiler_version,
-    root_path=api_settings.root_path,
-)
+# app = FastAPI(
+#     title=api_settings.name,
+#     description="A lightweight Cloud Optimized GeoTIFF tile server",
+#     version=titiler_version,
+#     root_path=api_settings.root_path,
+# )
+app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    logging.info("Called root handler")
+    return {"Hello": "World"}
+
 logging.info("Created app")
 
 # if not api_settings.disable_cog:
@@ -88,24 +96,24 @@ logging.info("Created app")
 #     exclude_path={r"/healthz"},
 # )
 
-if api_settings.debug:
-    app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
-    app.add_middleware(TotalTimeMiddleware)
+# if api_settings.debug:
+#     app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
+#     app.add_middleware(TotalTimeMiddleware)
 
 # if api_settings.lower_case_query_parameters:
 #     app.add_middleware(LowerCaseQueryStringMiddleware)
 
 
-@app.get("/healthz", description="Health Check", tags=["Health Check"])
-def ping():
-    """Health check."""
-    return {"ping": "pong!"}
+# @app.get("/healthz", description="Health Check", tags=["Health Check"])
+# def ping():
+#     """Health check."""
+#     return {"ping": "pong!"}
 
 
-@app.get("/", response_class=HTMLResponse, include_in_schema=False)
-def landing(request: Request):
-    """TiTiler Landing page"""
-    logging.info("On landing function")
-    return templates.TemplateResponse(
-        name="index.html", context={"request": request}, media_type="text/html",
-    )
+# @app.get("/", response_class=HTMLResponse, include_in_schema=False)
+# def landing(request: Request):
+#     """TiTiler Landing page"""
+#     logging.info("On landing function")
+#     return templates.TemplateResponse(
+#         name="index.html", context={"request": request}, media_type="text/html",
+#     )
