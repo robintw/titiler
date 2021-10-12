@@ -96,12 +96,12 @@ add_exception_handlers(app, MOSAIC_STATUS_CODES)
 #     exclude_path={r"/healthz"},
 # )
 
-if api_settings.debug:
-    app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
-    app.add_middleware(TotalTimeMiddleware)
+# if api_settings.debug:
+#     app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
+#     app.add_middleware(TotalTimeMiddleware)
 
-if api_settings.lower_case_query_parameters:
-    app.add_middleware(LowerCaseQueryStringMiddleware)
+# if api_settings.lower_case_query_parameters:
+#     app.add_middleware(LowerCaseQueryStringMiddleware)
 
 
 @app.get("/healthz", description="Health Check", tags=["Health Check"])
