@@ -10,7 +10,7 @@ class ApiSettings(pydantic.BaseSettings):
     cors_origins: str = "*"
     cachecontrol: str = "public, max-age=3600"
     root_path: str = ""
-    debug: bool = False
+    debug: bool = True
 
     disable_cog: bool = False
     disable_stac: bool = False

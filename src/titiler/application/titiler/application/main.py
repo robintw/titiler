@@ -42,6 +42,7 @@ app = FastAPI(
     version=titiler_version,
     root_path=api_settings.root_path,
 )
+logging.info("Created app")
 
 if not api_settings.disable_cog:
     app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
@@ -104,6 +105,7 @@ def ping():
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 def landing(request: Request):
     """TiTiler Landing page"""
+    logging.info("On landing function")
     return templates.TemplateResponse(
         name="index.html", context={"request": request}, media_type="text/html",
     )
