@@ -90,7 +90,7 @@ add_exception_handlers(app, MOSAIC_STATUS_CODES)
 # )
 
 # Seems to make it hang...
-if api_settings.debug:
+# if api_settings.debug:
     # app.add_middleware(LoggerMiddleware, headers=True, querystrings=True)
 #     app.add_middleware(TotalTimeMiddleware)
 
