@@ -28,9 +28,9 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette_cramjam.middleware import CompressionMiddleware
 
-logging.getLogger("botocore.credentials").disabled = True
-logging.getLogger("botocore.utils").disabled = True
-logging.getLogger("rio-tiler").setLevel(logging.ERROR)
+# logging.getLogger("botocore.credentials").disabled = True
+# logging.getLogger("botocore.utils").disabled = True
+# logging.getLogger("rio-tiler").setLevel(logging.ERROR)
 
 templates = Jinja2Templates(directory=str(resources_files(__package__) / "templates"))
 
@@ -47,13 +47,13 @@ logging.info("Created app")
 if not api_settings.disable_cog:
     app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
 
-if not api_settings.disable_stac:
-    app.include_router(
-        stac.router, prefix="/stac", tags=["SpatioTemporal Asset Catalog"]
-    )
+# if not api_settings.disable_stac:
+#     app.include_router(
+#         stac.router, prefix="/stac", tags=["SpatioTemporal Asset Catalog"]
+#     )
 
-if not api_settings.disable_mosaic:
-    app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
+# if not api_settings.disable_mosaic:
+#     app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
 
 app.include_router(tms.router, tags=["TileMatrixSets"])
 add_exception_handlers(app, DEFAULT_STATUS_CODES)

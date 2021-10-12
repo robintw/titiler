@@ -79,12 +79,12 @@ class LoggerMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next):
         """Add logs."""
-        self.logger.debug(str(request.url))
+        self.logger.info(str(request.url))
         qs = dict(request.query_params)
         if qs and self.querystrings:
-            self.logger.debug(qs)
+            self.logger.info(qs)
         if self.headers:
-            self.logger.debug(dict(request.headers))
+            self.logger.info(dict(request.headers))
 
         response = await call_next(request)
         return response
