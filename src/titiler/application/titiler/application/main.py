@@ -52,8 +52,8 @@ app = FastAPI()
 
 logging.info("Created app")
 
-# if not api_settings.disable_cog:
-#     app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
+if not api_settings.disable_cog:
+    app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
 
 # if not api_settings.disable_stac:
 #     app.include_router(
@@ -64,8 +64,8 @@ logging.info("Created app")
 #     app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
 
 # app.include_router(tms.router, tags=["TileMatrixSets"])
-# add_exception_handlers(app, DEFAULT_STATUS_CODES)
-# add_exception_handlers(app, MOSAIC_STATUS_CODES)
+add_exception_handlers(app, DEFAULT_STATUS_CODES)
+add_exception_handlers(app, MOSAIC_STATUS_CODES)
 
 
 # # Set all CORS enabled origins
