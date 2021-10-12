@@ -104,10 +104,10 @@ logging.info("Created app")
 #     app.add_middleware(LowerCaseQueryStringMiddleware)
 
 
-# @app.get("/healthz", description="Health Check", tags=["Health Check"])
-# def ping():
-#     """Health check."""
-#     return {"ping": "pong!"}
+@app.get("/healthz", description="Health Check", tags=["Health Check"])
+def ping():
+    """Health check."""
+    return {"ping": "pong!"}
 
 
 # @app.get("/", response_class=HTMLResponse, include_in_schema=False)
