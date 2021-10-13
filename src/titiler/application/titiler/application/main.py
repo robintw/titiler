@@ -83,11 +83,11 @@ app.add_middleware(
     },
 )
 
-app.add_middleware(
-    CacheControlMiddleware,
-    cachecontrol=api_settings.cachecontrol,
-    exclude_path={r"/healthz"},
-)
+# app.add_middleware(
+#     CacheControlMiddleware,
+#     cachecontrol=api_settings.cachecontrol,
+#     exclude_path={r"/healthz"},
+# )
 
 # Seems to make it hang...
 # if api_settings.debug:
