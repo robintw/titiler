@@ -7,7 +7,8 @@ from typing import Dict, Optional
 import morecantile
 from morecantile import tms
 from morecantile.models import TileMatrixSet
-from rasterio.crs import CRS
+# from rasterio.crs import CRS
+from pyproj import CRS
 from rio_tiler.colormap import cmap, parse_color
 
 from fastapi import HTTPException, Query
@@ -43,23 +44,23 @@ ColorMapName = Enum(  # type: ignore
     "ColorMapName", [(a, a) for a in sorted(cmap.list())]
 )
 
-# # CUSTOM TMS for EPSG:3413
-# EPSG3413 = morecantile.TileMatrixSet.custom(
-#     [-4194300, -4194300, 4194300, 4194300],
-#     CRS.from_epsg(3413),
-#     identifier="EPSG3413",
-#     matrix_scale=[2, 2],
-# )
+# CUSTOM TMS for EPSG:3413
+EPSG3413 = morecantile.TileMatrixSet.custom(
+    [-4194300, -4194300, 4194300, 4194300],
+    CRS.from_epsg(3413),
+    identifier="EPSG3413",
+    matrix_scale=[2, 2],
+)
 
-# # CUSTOM TMS for EPSG:6933
-# # info from https://epsg.io/6933
-# EPSG6933 = morecantile.TileMatrixSet.custom(
-#     [-17357881.81713629, -7324184.56362408, 17357881.81713629, 7324184.56362408],
-#     CRS.from_epsg(6933),
-#     identifier="EPSG6933",
-#     matrix_scale=[1, 1],
-# )
-# tms = tms.register([EPSG3413, EPSG6933])
+# CUSTOM TMS for EPSG:6933
+# info from https://epsg.io/6933
+EPSG6933 = morecantile.TileMatrixSet.custom(
+    [-17357881.81713629, -7324184.56362408, 17357881.81713629, 7324184.56362408],
+    CRS.from_epsg(6933),
+    identifier="EPSG6933",
+    matrix_scale=[1, 1],
+)
+tms = tms.register([EPSG3413, EPSG6933])
 
 TileMatrixSetName = Enum(  # type: ignore
     "TileMatrixSetName", [(a, a) for a in sorted(tms.list())]
