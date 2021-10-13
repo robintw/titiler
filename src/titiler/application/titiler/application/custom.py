@@ -44,12 +44,12 @@ ColorMapName = Enum(  # type: ignore
 )
 
 # # CUSTOM TMS for EPSG:3413
-EPSG3413 = morecantile.TileMatrixSet.custom(
-    [-4194300, -4194300, 4194300, 4194300],
-    CRS.from_epsg(3413),
-    identifier="EPSG3413",
-    matrix_scale=[2, 2],
-)
+# EPSG3413 = morecantile.TileMatrixSet.custom(
+#     [-4194300, -4194300, 4194300, 4194300],
+#     CRS.from_epsg(3413),
+#     identifier="EPSG3413",
+#     matrix_scale=[2, 2],
+# )
 
 # # CUSTOM TMS for EPSG:6933
 # # info from https://epsg.io/6933
